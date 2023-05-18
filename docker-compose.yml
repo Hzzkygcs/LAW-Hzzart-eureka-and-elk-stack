@@ -31,7 +31,7 @@ services:
       - elasticsearch
 
   eureka-server:
-    image: springcloud/eureka-server
+    image: springcloud/eureka
     container_name: eureka-server
     ports:
       - 8761:8761
