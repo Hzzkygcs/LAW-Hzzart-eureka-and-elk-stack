@@ -1,40 +1,13 @@
 version: '3'
-
 services:
-#  elasticsearch:
-#    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
-#    container_name: elasticsearch
-#    environment:
-#      - discovery.type=single-node
-#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-#    ports:
-#      - 9200:9200
-#    volumes:
-#      - esdata:/usr/share/elasticsearch/data
-#
-#  logstash:
-#    image: docker.elastic.co/logstash/logstash:7.14.0
-#    container_name: logstash
-#    volumes:
-#      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
-#    ports:
-#      - 5000:5000
-#    depends_on:
-#      - elasticsearch
-#
-#  kibana:
-#    image: docker.elastic.co/kibana/kibana:7.14.0
-#    container_name: kibana
-#    ports:
-#      - 5601:5601
-#    depends_on:
-#      - elasticsearch
-
-  eureka-server:
-    image: springcloud/eureka
-    container_name: eureka-server
+  consul-server:
+    image: consul
+    container_name: consul-server
     ports:
-      - 8761:8761
+      - 8500:8500
+    command: consul agent -server -bootstrap-expect=1 -ui -client=0.0.0.0
+    networks:
+      - consul-network
 
-volumes:
-  esdata:
+networks:
+  consul-network:
