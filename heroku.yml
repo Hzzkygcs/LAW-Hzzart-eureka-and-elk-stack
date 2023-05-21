@@ -1,0 +1,6 @@
+build:
+  docker:
+    web: Dockerfile
+
+run:
+  web: consul agent -server -bootstrap-expect=1 -ui -client=0.0.0.0 -data-dir=/consul/data -bind=0.0.0.0:$PORT
