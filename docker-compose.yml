@@ -11,5 +11,17 @@ services:
     networks:
       - consul-network
 
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: K9A1qfhb1pWZV186eJasTE9kgrHLMTRzaaHnSjQ8RzVNvlashE
+      MONGO_INITDB_ROOT_DATABASE: ${MONGO_ROOT_DB:-mongodb}
+      MONGO_INITDB_DATABASE: init  # arbitrary value
+    volumes:
+      - ./mongo-init:/docker-entrypoint-initdb.d/
+
 networks:
   consul-network:
